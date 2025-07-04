@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Now | Lighting Host</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+        
+        :root {
+            --electric-blue: #0066ff;
+            --deep-blue: #0044cc;
+            --neon-green: #00ff88;
+            --cyber-purple: #6e48aa;
+            --elite-gold: #ffd700;
+            --gamer-red: #ff3333;
+            --power-orange: #ff7700;
+            --ultra-violet: #a855f7;
+            --starter-teal: #00b4d8;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: radial-gradient(circle at center, #0a192f, #000000);
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .order-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: white;
+            text-shadow: 0 0 10px var(--electric-blue);
+        }
+
+        .logo i {
+            color: var(--neon-green);
+            margin-right: 15px;
+            font-size: 2.8rem;
+            animation: pulseGlow 2s infinite alternate;
+        }
+
+        @keyframes pulseGlow {
+            0% { text-shadow: 0 0 10px var(--neon-green); }
+            100% { text-shadow: 0 0 20px var(--neon-green), 0 0 30px var(--neon-green); }
+        }
+
+        /* Plan Options Grid */
+        .plan-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .plan-option {
+            background: rgba(0, 30, 60, 0.6);
+            border-radius: 15px;
+            padding: 30px;
+            border: 2px solid transparent;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .plan-option:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 100, 255, 0.2);
+        }
+
+        /* Plan-Specific Animations */
+        .nano-option {
+            border-color: var(--electric-blue);
+        }
+        .nano-option:hover {
+            box-shadow: 0 15px 30px rgba(0, 102, 255, 0.3);
+        }
+        .nano-option::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, 
+                transparent 0%, 
+                rgba(0, 170, 255, 0.1) 50%, 
+                transparent 100%);
+            animation: shine 3s infinite;
+        }
+
+        .basic-option {
+            border-color: var(--neon-green);
+        }
+        .basic-option:hover {
+            box-shadow: 0 15px 30px rgba(0, 255, 136, 0.3);
+        }
+        .basic-option::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--neon-green), transparent);
+            animation: borderGlow 2s infinite alternate;
+        }
+
+        .starter-option {
+            border-color: var(--starter-teal);
+        }
+        .starter-option:hover {
+            box-shadow: 0 15px 30px rgba(0, 180, 216, 0.3);
+        }
+        .starter-option .plan-name {
+            color: var(--starter-teal);
+        }
+
+        .lite-option {
+            border-color: var(--electric-blue);
+        }
+        .lite-option:hover {
+            box-shadow: 0 15px 30px rgba(0, 102, 255, 0.3);
+        }
+
+        .gamer-option {
+            border-color: var(--gamer-red);
+            background: linear-gradient(135deg, rgba(0, 30, 60, 0.6), rgba(255, 51, 51, 0.2));
+        }
+        .gamer-option:hover {
+            box-shadow: 0 15px 30px rgba(255, 51, 51, 0.3);
+        }
+        .gamer-option .plan-name {
+            color: var(--gamer-red);
+        }
+
+        .power-option {
+            border-color: var(--power-orange);
+            background: linear-gradient(135deg, rgba(0, 30, 60, 0.6), rgba(255, 119, 0, 0.2));
+        }
+        .power-option:hover {
+            box-shadow: 0 15px 30px rgba(255, 119, 0, 0.3);
+        }
+        .power-option .plan-name {
+            color: var(--power-orange);
+        }
+
+        .pro-option {
+            border-color: var(--cyber-purple);
+            background: linear-gradient(135deg, rgba(0, 30, 60, 0.6), rgba(110, 72, 170, 0.2));
+        }
+        .pro-option:hover {
+            box-shadow: 0 15px 30px rgba(110, 72, 170, 0.3);
+        }
+        .pro-option .plan-name {
+            background: linear-gradient(90deg, var(--cyber-purple), var(--electric-blue));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .ultra-option {
+            border-color: var(--ultra-violet);
+            background: linear-gradient(135deg, rgba(0, 30, 60, 0.6), rgba(168, 85, 247, 0.2));
+        }
+        .ultra-option:hover {
+            box-shadow: 0 15px 30px rgba(168, 85, 247, 0.3);
+        }
+        .ultra-option .plan-name {
+            color: var(--ultra-violet);
+        }
+
+        .elite-option {
+            border-color: var(--elite-gold);
+            background: linear-gradient(135deg, rgba(0, 30, 60, 0.6), rgba(255, 215, 0, 0.1));
+        }
+        .elite-option:hover {
+            box-shadow: 0 15px 30px rgba(255, 215, 0, 0.2);
+        }
+        .elite-option .plan-name {
+            color: var(--elite-gold);
+        }
+
+        /* Animation Keyframes */
+        @keyframes shine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        @keyframes borderGlow {
+            0% { opacity: 0.3; }
+            100% { opacity: 1; }
+        }
+
+        .plan-name {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .plan-price {
+            font-size: 2rem;
+            font-weight: 700;
+            text-align: center;
+            margin: 15px 0;
+        }
+
+        .plan-features {
+            list-style: none;
+        }
+
+        .plan-features li {
+            padding: 8px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .plan-features li i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+
+        /* Selected Plan Indicator - Updated with higher specificity */
+        .plan-option.selected {
+            border-width: 3px !important;
+            box-shadow: 0 0 25px currentColor !important;
+            transform: translateY(-10px);
+        }
+
+        .plan-option.selected::after {
+            content: '✓ SELECTED';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--neon-green);
+            color: #0a192f;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            z-index: 1;
+        }
+
+        /* Order Button */
+        .order-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, var(--electric-blue), var(--deep-blue));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .order-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 100, 255, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="order-header">
+            <div class="logo">
+                <i class="fas fa-bolt"></i>
+                Lighting Host
+            </div>
+            <h1>Choose Your Minecraft Plan</h1>
+        </div>
+        
+        <!-- Plan Options -->
+        <div class="plan-options">
+            <!-- NANO Plan -->
+            <div class="plan-option nano-option selected" onclick="selectPlan('nano')">
+                <h3 class="plan-name">NANO</h3>
+                <div class="plan-price">¥49/month</div>
+                <ul class="plan-features">
+                    <li><i class="fas fa-memory"></i> 1GB DDR4 Memory</li>
+                    <li><i class="fas fa-microchip"></i> 60% CPU</li>
+                    <li><i class="fas fa-hdd"></i> 10GB SSD</li>
+                    <li><i class="fas fa-shield-alt"></i> DDoS Protection</li>
+                    <li><i class="fas fa-tachometer-alt"></i> Web Panel</li>
+                    <li><i class="fas fa-headset"></i> 24/7 Support</li>
+                </ul>
+            </div>
+            
+            <!-- BASIC Plan -->
+            <div class="plan-option basic-option" onclick="selectPlan('basic')">
+                <h3 class="plan-name">BASIC</h3>
+                <div class="plan-price">¥99/month</div>
+                <ul class="plan-features">
+                    <li><i class="fas fa-memory"></i> 2GB DDR4 Memory</li>
+                    <li><i class="fas fa-microchip"></i> 100% CPU</li>
+                    <li><i class="fas fa-hdd"></i> 15GB SSD</li>
+                    <li><i class="fas fa-shield-alt"></i> DDoS Protection</li>
+                    <li><i class="fas fa-tachometer-alt"></i> Web Panel</li>
+                    <li><i class="fas fa-headset"></i> 24/7 Support</li>
+                </ul>
+            </div>
+            
+            <!-- STARTER Plan -->
+            <div class="plan-option starter-option" onclick="selectPlan('starter')">
+                <h3 class="plan-name">STARTER</h3>
+                <div class="plan-price">¥129/month</div>
+                <ul class="plan-features">
+                    <li><i class="fas fa-memory"></i> 3GB DDR4 Memory</li>
+                    <li><i class="fas fa-microchip"></i> 150% CPU</li>
+                    <li><i class="fas fa-hdd"></i> 20GB SSD</li>
+                    <li><i class="fas fa-shield-alt"></i> DDoS Protection</li>
+                    <li><i class="fas fa-tachometer-alt"></i> Web Panel</li>
+                    <li><i class="fas fa-headset"></i> 24/7 Support</li>
+                </ul>
+            </div>
+            
+            <!-- LITE Plan -->
+            <div class="plan-option lite-option" onclick="selectPlan('lite')">
+                <h3 class="plan-name">LITE</h3>
+                <div class="plan-price">¥159/month</div>
+                <ul class="plan-features">
+                    <li><i class="fas fa-memory"></i> 4GB DDR4 Memory</li>
+                    <li><i class="fas fa-microchip"></i> 160% CPU</li>
+                    <li><i class="fas fa-hdd"></i> 25GB SSD</li>
+                    <li><i class="fas fa-shield-alt"></i> DDoS Protection</li>
+                    <li><i class="fas fa-tachometer-alt"></i> Web Panel</li>
+                    <li><i class="fas fa-headset"></i> 24/7 Support</li>
+                </ul>
+            </div>
+            
+            <!-- GAMER Plan -->
+            <div class="plan-option gamer-option" onclick="selectPlan('gamer')">
+                <h3 class="plan-name">GAMER</h3>
+                <div class="plan-price">¥199/month</div>
+                <ul class="plan-features">
+                    <li><i class="fas fa-memory"></i> 5GB DDR4 Memory</li>
+                    <li><i class="fas fa-microchip"></i> 180% CPU</li>
+                    <li><i class="fas fa-hdd"></i> 30GB SSD</li>
+                    <li><i class="fas fa-shield-alt"></i> DDoS Protection</li>
+                    <li><i class="fas fa-tachometer-alt"></i> Web Panel</li>
+                    <li><i class="fas fa-headset"></i> 24/7 Support</li>
+                </ul>
+            </div>
+            
+            <!-- POWER Plan -->
+            <div class="plan-option power-option" onclick="selectPlan('power')">
+                <h3 class="plan-name">POWER</h3>
+                <div class="plan-price">¥249/month</div>
+                <ul class="plan-features">
+                    <li><i class="fas fa-memory"></i> 6GB DDR4 Memory</li>
+                    <li><i class="fas fa-microchip"></i> 200% CPU</li>
+                    <li><i class="fas fa-hdd"></i> 35GB SSD</li>
+                    <li><i class="fas fa-shield-alt"></i> DDoS Protection</li>
+                    <li><i class="fas fa-tachometer-alt"></i> Web Panel</li>
+                    <li><i class="fas fa-headset"></i> 24/7 Support</li>
+                </ul>
+            </div>
+            
+            <!-- PRO Plan -->
+            <div class="plan-option pro-option" onclick="selectPlan('pro')">
+                <h3 class="plan-name">PRO</h3>
+                <div class="plan-price">¥279/month</div>
+                <ul class="plan-features">
+                    <li><i class="fas fa-memory"></i> 7GB DDR4 Memory</li>
+                    <li><i class="fas fa-microchip"></i> 260% CPU</li>
+                    <li><i class="fas fa-hdd"></i> 40GB SSD</li>
+                    <li><i class="fas fa-shield-alt"></i> DDoS Protection</li>
+                    <li><i class="fas fa-tachometer-alt"></i> Web Panel</li>
+                    <li><i class="fas fa-headset"></i> 24/7 Support</li>
+                </ul>
+            </div>
+            
+            <!-- ULTRA Plan -->
+            <div class="plan-option ultra-option" onclick="selectPlan('ultra')">
+                <h3 class="plan-name">ULTRA</h3>
+                <div class="plan-price">¥319/month</div>
+                <ul class="plan-features">
+                    <li><i class="fas fa-memory"></i> 8GB DDR4 Memory</li>
+                    <li><i class="fas fa-microchip"></i> 290% CPU</li>
+                    <li><i class="fas fa-hdd"></i> 45GB SSD</li>
+                    <li><i class="fas fa-shield-alt"></i> DDoS Protection</li>
+                    <li><i class="fas fa-tachometer-alt"></i> Web Panel</li>
+                    <li><i class="fas fa-headset"></i> 24/7 Support</li>
+                </ul>
+            </div>
+            
+            <!-- ELITE Plan -->
+            <div class="plan-option elite-option" onclick="selectPlan('elite')">
+                <h3 class="plan-name">ELITE</h3>
+                <div class="plan-price">¥379/month</div>
+                <ul class="plan-features">
+                    <li><i class="fas fa-memory"></i> 10GB DDR4 Memory</li>
+                    <li><i class="fas fa-microchip"></i> 300% CPU</li>
+                    <li><i class="fas fa-hdd"></i> 55GB SSD</li>
+                    <li><i class="fas fa-shield-alt"></i> DDoS Protection</li>
+                    <li><i class="fas fa-tachometer-alt"></i> Web Panel</li>
+                    <li><i class="fas fa-headset"></i> 24/7 Support</li>
+                </ul>
+            </div>
+        </div>
+        
+        <button class="order-btn" onclick="proceedToCheckout()">
+            <i class="fas fa-arrow-right"></i> CONTINUE TO CHECKOUT
+        </button>
+    </div>
+
+    <script>
+        // Current selected plan
+        let selectedPlan = 'nano';
+        
+        // Select plan function
+        function selectPlan(plan) {
+            // Remove selected class from all options
+            document.querySelectorAll('.plan-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            // Add selected class to clicked option
+            document.querySelector(`.${plan}-option`).classList.add('selected');
+            
+            // Update selected plan
+            selectedPlan = plan;
+            
+            // Play selection animation
+            animateSelection(plan);
+        }
+        
+        // Animate plan selection
+        function animateSelection(plan) {
+            const option = document.querySelector(`.${plan}-option`);
+            
+            // Pulse animation
+            option.style.transform = 'scale(1.03)';
+            setTimeout(() => {
+                option.style.transform = 'scale(1)';
+            }, 200);
+            
+            // Color flash
+            option.style.boxShadow = `0 0 30px ${getPlanColor(plan)}`;
+            setTimeout(() => {
+                option.style.boxShadow = '';
+            }, 500);
+        }
+        
+        // Get plan color
+        function getPlanColor(plan) {
+            switch(plan) {
+                case 'nano': return 'rgba(0, 102, 255, 0.5)';
+                case 'basic': return 'rgba(0, 255, 136, 0.5)';
+                case 'starter': return 'rgba(0, 180, 216, 0.5)';
+                case 'lite': return 'rgba(0, 102, 255, 0.5)';
+                case 'gamer': return 'rgba(255, 51, 51, 0.5)';
+                case 'power': return 'rgba(255, 119, 0, 0.5)';
+                case 'pro': return 'rgba(110, 72, 170, 0.5)';
+                case 'ultra': return 'rgba(168, 85, 247, 0.5)';
+                case 'elite': return 'rgba(255, 215, 0, 0.5)';
+                default: return 'rgba(0, 150, 255, 0.5)';
+            }
+        }
+        
+        // Proceed to checkout
+        function proceedToCheckout() {
+            // Add loading animation to button
+            const btn = document.querySelector('.order-btn');
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> PROCESSING';
+            btn.style.background = 'linear-gradient(135deg, #00a86b, #007a4d)';
+            
+            // Redirect after delay
+            setTimeout(() => {
+                window.location.href = `checkout.html?plan=${selectedPlan}`;
+            }, 1000);
+        }
+    </script>
+</body>
+</html>

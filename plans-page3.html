@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lighting Host - Minecraft Plans (Page 3)</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+        
+        :root {
+            --primary: #0066ff;
+            --secondary: #0044cc;
+            --accent: #00ff88;
+            --dark: #1a1a2e;
+            --light: #f0f8ff;
+            --glow: rgba(0, 102, 255, 0.3);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: white;
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+            background: linear-gradient(-45deg, #0a192f, #162a47, #1e3a6e);
+            background-size: 400% 400%;
+            animation: gradientBG 12s ease infinite;
+            position: relative;
+        }
+        
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        /* Lightning Bolt Animation */
+        .lightning {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.05;
+            pointer-events: none;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='%2300ffff' d='M50 5L20 50h20L40 95l40-45H60z'/%3E%3C/svg%3E");
+            background-size: 100px;
+            animation: lightning 15s linear infinite;
+        }
+        
+        @keyframes lightning {
+            0% { opacity: 0; transform: translateY(-100%); }
+            2% { opacity: 0.3; }
+            4% { opacity: 0; }
+            100% { opacity: 0; transform: translateY(100vh); }
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hosting-card {
+            background: rgba(0, 20, 40, 0.7);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            padding: 50px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(0, 150, 255, 0.2);
+        }
+        
+        .hosting-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 80, 255, 0.3);
+            border-color: rgba(0, 200, 255, 0.4);
+        }
+        
+        .logo {
+            color: var(--light);
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            text-shadow: 0 0 15px var(--primary);
+        }
+        
+        .logo i {
+            margin-right: 15px;
+            font-size: 2.8rem;
+            color: var(--accent);
+            animation: pulse 2s infinite alternate;
+        }
+        
+        @keyframes pulse {
+            0% { text-shadow: 0 0 10px var(--accent); }
+            100% { text-shadow: 0 0 20px var(--accent), 0 0 30px var(--accent); }
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 40px;
+        }
+        
+        .plans-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .plan-card {
+            background: rgba(0, 30, 60, 0.6);
+            border-radius: 10px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 150, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .plan-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 100, 255, 0.2);
+            border-color: rgba(0, 200, 255, 0.3);
+        }
+        
+        .plan-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary), var(--accent));
+        }
+        
+        .plan-name {
+            font-size: 1.5rem;
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+        
+        .plan-price {
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 15px 0;
+            color: white;
+        }
+        
+        .plan-features {
+            list-style: none;
+            margin: 20px 0;
+        }
+        
+        .plan-features li {
+            padding: 8px 0;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+        }
+        
+        .plan-features li i {
+            margin-right: 10px;
+            color: var(--accent);
+            font-size: 0.8rem;
+        }
+        
+        .order-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+            width: 100%;
+            margin-top: 15px;
+        }
+        
+        .order-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 100, 255, 0.4);
+        }
+        
+        .order-btn:active {
+            transform: translateY(1px);
+        }
+        
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+        
+        .nav-btn {
+            background: rgba(0, 50, 100, 0.5);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 150, 255, 0.3);
+        }
+        
+        .nav-btn:hover {
+            background: rgba(0, 100, 200, 0.5);
+            transform: translateY(-3px);
+        }
+        
+        .page-indicator {
+            color: rgba(255, 255, 255, 0.7);
+            align-self: center;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Lightning Animation Background -->
+    <div class="lightning"></div>
+    
+    <div class="container">
+        <div class="hosting-card">
+            <div class="logo">
+                <i class="fas fa-bolt"></i>
+                Lighting Host
+            </div>
+            <p class="tagline">Ultra-Low Latency Minecraft Servers | Hosted in Mumbai | Powered by AMD EPYC, DDR4 RAM & SSD Storage</p>
+            
+            <div class="plans-container">
+                <!-- MAX Plan -->
+                <div class="plan-card">
+                    <h3 class="plan-name">MAX</h3>
+                    <div class="plan-price">¥439/month</div>
+                    <ul class="plan-features">
+                        <li><i class="fas fa-memory"></i> 12GB DDR4 Memory</li>
+                        <li><i class="fas fa-microchip"></i> 310% CPU</li>
+                        <li><i class="fas fa-hdd"></i> 65GB SSD</li>
+                        <li><i class="fas fa-shield-alt"></i> DDoS Protection</li>
+                        <li><i class="fas fa-tachometer-alt"></i> Web Panel</li>
+                        <li><i class="fas fa-headset"></i> 24/7 Support</li>
+                    </ul>
+                    <a href="#" class="order-btn">ORDER</a>
+                </div>
+                
+                <!-- EXTREME Plan -->
+                <div class="plan-card">
+                    <h3 class="plan-name">EXTREME</h3>
+                    <div class="plan-price">¥499/month</div>
+                    <ul class="plan-features">
+                        <li><i class="fas fa-memory"></i> 14GB DDR4 Memory</li>
+                        <li><i class="fas fa-microchip"></i> 360% CPU</li>
+                        <li><i class="fas fa-hdd"></i> 75GB SSD</li>
+                        <li><i class="fas fa-shield-alt"></i> DDoS Protection</li>
+                        <li><i class="fas fa-tachometer-alt"></i> Web Panel</li>
+                        <li><i class="fas fa-headset"></i> 24/7 Support</li>
+                    </ul>
+                    <a href="#" class="order-btn">ORDER</a>
+                </div>
+                
+                <!-- TITAN Plan -->
+                <div class="plan-card">
+                    <h3 class="plan-name">TITAN</h3>
+                    <div class="plan-price">¥549/month</div>
+                    <ul class="plan-features">
+                        <li><i class="fas fa-memory"></i> 16GB DDR4 Memory</li>
+                        <li><i class="fas fa-microchip"></i> 390% CPU</li>
+                        <li><i class="fas fa-hdd"></i> 85GB SSD</li>
+                        <li><i class="fas fa-shield-alt"></i> DDoS Protection</li>
+                        <li><i class="fas fa-tachometer-alt"></i> Web Panel</li>
+                        <li><i class="fas fa-headset"></i> 24/7 Support</li>
+                    </ul>
+                    <a href="#" class="order-btn">ORDER</a>
+                </div>
+                
+                <!-- GOD Plan -->
+                <div class="plan-card">
+                    <h3 class="plan-name">GOD</h3>
+                    <div class="plan-price">¥599/month</div>
+                    <ul class="plan-features">
+                        <li><i class="fas fa-memory"></i> 18GB DDR4 Memory</li>
+                        <li><i class="fas fa-microchip"></i> 410% CPU</li>
+                        <li><i class="fas fa-hdd"></i> 95GB SSD</li>
+                        <li><i class="fas fa-shield-alt"></i> DDoS Protection</li>
+                        <li><i class="fas fa-tachometer-alt"></i> Web Panel</li>
+                        <li><i class="fas fa-headset"></i> 24/7 Support</li>
+                    </ul>
+                    <a href="#" class="order-btn">ORDER</a>
+                </div>
+                
+                <!-- BEAST Plan -->
+                <div class="plan-card">
+                    <h3 class="plan-name">BEAST</h3>
+                    <div class="plan-price">¥649/month</div>
+                    <ul class="plan-features">
+                        <li><i class="fas fa-memory"></i> 20GB DDR4 Memory</li>
+                        <li><i class="fas fa-microchip"></i> 460% CPU</li>
+                        <li><i class="fas fa-hdd"></i> 100+GB SSD</li>
+                        <li><i class="fas fa-shield-alt"></i> DDoS Protection</li>
+                        <li><i class="fas fa-tachometer-alt"></i> Web Panel</li>
+                        <li><i class="fas fa-headset"></i> 24/7 Support</li>
+                    </ul>
+                    <a href="#" class="order-btn">ORDER</a>
+                </div>
+            </div>
+            
+            <div class="nav-buttons">
+                <a href="plans-page2.html" class="nav-btn"><i class="fas fa-arrow-left"></i> Previous</a>
+                <span class="page-indicator">Page 3 of 3</span>
+                <a href="#" class="nav-btn" style="visibility: hidden;">Next <i class="fas fa-arrow-right"></i></a>
+            </div>
+            
+            <div class="footer">
+                © 2025 Lighting Host. All rights reserved.
+            </div>
+        </div>
+    </div>
+</body>
+</html>
